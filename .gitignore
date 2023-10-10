@@ -1,0 +1,9 @@
+.env
+.env.server
+package-lock.json
+local*
+*compose.yml
+Makefile
+
+node_modules/
+data/
