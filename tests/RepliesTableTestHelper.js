@@ -2,12 +2,12 @@ const pool = require('../src/Infrastructures/database/postgres/pool');
 
 const RepliesTableTestHelper = {
   async addReply({
-    id = 'reply1',
-    content = 'balasan',
-    owner = 'user1',
-    commentId = 'comment1',
+    id = '123',
+    content = 'konten',
+    owner = 'dicoding',
+    commentId = '123',
     isDelete = 'false',
-    date = 'testing date'
+    date = 'date tes'
     
   }) {
     const query = {
