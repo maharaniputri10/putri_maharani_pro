@@ -29,7 +29,7 @@ class ShowThreadUseCase {
   _validateDeletedReply(replies) {
     for (const reply of replies) {
       if (reply.is_delete) {
-        reply.content = 'balasan dihapus';
+        reply.content = 'reply dihapus';
       }
       delete reply.is_delete;
     }

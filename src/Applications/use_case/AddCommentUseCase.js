@@ -2,9 +2,7 @@ const CreateComment = require('../../Domains/comments/entities/CreateComment');
 
 
 class AddCommentUseCase {
-    constructor({
-      commentRepository, threadRepository
-    }) {
+    constructor({ commentRepository, threadRepository }) {
       this.commentRepository = commentRepository;
       this.threadRepository = threadRepository;
     }

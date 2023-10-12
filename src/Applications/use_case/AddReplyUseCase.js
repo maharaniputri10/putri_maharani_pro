@@ -2,9 +2,7 @@ const CreateReply = require('../../Domains/replies/entities/CreateReply');
 
 
 class AddReplyUseCase {
-    constructor({
-      commentRepository, threadRepository, replyRepository
-    }) {
+    constructor({ commentRepository, threadRepository, replyRepository }) {
       this.commentRepository = commentRepository;
       this.threadRepository = threadRepository;
       this.replyRepository = replyRepository;

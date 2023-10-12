@@ -1,10 +1,5 @@
 class DeleteReplyUseCase {
-    constructor({ 
-      threadRepository,
-      commentRepository, 
-      replyRepository
-     }) 
-     {
+    constructor({ threadRepository, commentRepository, replyRepository })  {
       this.threadRepository = threadRepository;
       this.commentRepository = commentRepository;
       this.replyRepository = replyRepository;

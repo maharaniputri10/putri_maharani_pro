@@ -1,7 +1,5 @@
 class DeleteCommentUseCase {
-    constructor({ 
-      commentRepository, threadRepository 
-    }) {
+    constructor({ commentRepository, threadRepository }) {
       this.commentRepository = commentRepository;
       this.threadRepository = threadRepository;
     }
