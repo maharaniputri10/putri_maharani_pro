@@ -1,3 +1,4 @@
+
 const ThreadRepository = require('../../Domains/threads/ThreadRepository');
 const NotFoundError = require('../../Commons/exceptions/NotFoundError');
 const CreatedThread = require('../../Domains/threads/entities/CreatedThread');

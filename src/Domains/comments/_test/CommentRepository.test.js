@@ -1,3 +1,4 @@
+
 const CommentRepository = require('../CommentRepository');
 
 describe('CommentRepository interface', () => {

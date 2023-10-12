@@ -1,3 +1,5 @@
+
+
 const pool = require('../src/Infrastructures/database/postgres/pool');
 
 const CommentsTableTestHelper = {

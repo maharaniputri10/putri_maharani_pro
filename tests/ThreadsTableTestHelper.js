@@ -1,16 +1,13 @@
 const pool = require('../src/Infrastructures/database/postgres/pool');
-/**put
-*/
 
 const ThreadsTableTestHelper = {
   async addThread({
     id = '123',
     title = 'title',
     body = 'body',
-    owner = 'dicoding'
-  })
-  
-  {
+    owner = 'dicoding',
+    date = 'date tes' 
+  }) {
     const query = {
       text: 'INSERT INTO threads VALUES($1, $2, $3, $4, $5) RETURNING *',
       values: [id, title, body, owner, date]
@@ -19,7 +16,6 @@ const ThreadsTableTestHelper = {
     const result = await pool.query(query);
     return result.rows[0];
   },
-
 
   async findThreadById(id) {
     const query = {
@@ -31,11 +27,11 @@ const ThreadsTableTestHelper = {
     return result.rows;
   },
 
-
   async cleanTable() {
     await pool.query('DELETE FROM threads WHERE 1=1');
   }
 };
 
-
 module.exports = ThreadsTableTestHelper;
+
+/**update PM */

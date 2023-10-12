@@ -8,7 +8,7 @@ describe('CreatedThread entities', () => {
             title: 'Ini title',
             owner : 'dicoding'
         };
-        expect(() => new CreatedThread(payload)).toThrowError('CREATED_THARED.NOT_CONTAIN_NEEDED_PROPERTY');
+        expect(() => new CreatedThread(payload)).toThrowError('CREATED_THREAD.NOT_CONTAIN_NEEDED_PROPERTY');
     });
 
 
@@ -18,7 +18,7 @@ describe('CreatedThread entities', () => {
             title : true,
             owner : {}
         };
-        expect(() => new CreatedThread(payload)).toThrowError('CREATED_THRED.NOT_MEET_DATA_TYPE_SPECIFICATION');
+        expect(() => new CreatedThread(payload)).toThrowError('CREATED_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION');
     });
 
 
