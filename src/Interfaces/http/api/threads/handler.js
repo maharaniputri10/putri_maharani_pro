@@ -13,28 +13,26 @@ class ThreadsHandler {
 
   async postThreadHandler(request, h) {
     const { title, body } = request.payload;
-
     const { id } = request.auth.credentials;
     
     const addThreadUseCase = this._container.getInstance(AddThreadUseCase.name);
 
-    const addedThread = await threadUseCase.addThread(
-      {
-         title, 
-         body,
-         owner:id
-      }
-    );
+    const addedThread = await addThreadUseCase.execute({
+        title, 
+        body,
+        owner: id
+    });
 
     const response = h.response({
-      status: 'success',
-      data: {
-        addedThread
-      }
+        status: 'success',
+        data: {
+            addedThread
+        }
     });
     response.code(201);
     return response;
-  }
+}
+
 
 
   async getThreadHandler(request, h) {
