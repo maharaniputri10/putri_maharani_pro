@@ -16,7 +16,10 @@ class GetThreadUseCase {
     const validatedComments = this._validateDeletedComment(comments);
     const validatedReplies = this._validateDeletedReply(replies);
     
-    return {..thread, comments};
+    const commentsReplies = this._addReplyToComment(validatedComments, validatedReplies);
+    
+    return {...thread, commentsReplies };
+    
   }
 
 
