@@ -39,3 +39,4 @@ exports.down = (pgm) => {
         );  
     pgm.dropTable('threads');
 };
+

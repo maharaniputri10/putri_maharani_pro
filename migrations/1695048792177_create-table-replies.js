@@ -55,3 +55,4 @@ exports.down = (pgm) => {
         
     pgm.dropTable('replies');
 };
+

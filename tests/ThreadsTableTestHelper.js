@@ -32,5 +32,3 @@ const ThreadsTableTestHelper = {
 };
 
 module.exports = ThreadsTableTestHelper;
-
-/**update PM */
