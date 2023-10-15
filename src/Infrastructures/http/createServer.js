@@ -73,8 +73,9 @@ const createServer = async (container) => {
 
   server.ext('onPreResponse', (request, h) => {
     const { response } = request;
-
+    console.log(response);
     if (response instanceof Error) {
+      
       const translatedError = DomainErrorTranslator.translate(response);
 
       if (translatedError instanceof ClientError) {

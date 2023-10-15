@@ -11,14 +11,14 @@ class GetThreadUseCase {
   async execute(useCasePayload) {
     const thread = await this._threadRepository.getThreadById(useCasePayload);
     const comments = await this._commentRepository.getCommentsByThreadId(useCasePayload);
-    const replies = await this._replyRepository.getRepliesByThreadId(useCasePayload);
+    const replies = await this._replyRepository.getReplyByThreadId(useCasePayload);
 
     const validatedComments = this._validateDeletedComment(comments);
     const validatedReplies = this._validateDeletedReply(replies);
     
     const commentsReplies = this._addReplyToComment(validatedComments, validatedReplies);
     
-    return {...thread, commentsReplies };
+    return {...thread, comments: commentsReplies };
     
   }
 
