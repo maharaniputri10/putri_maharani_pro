@@ -4,8 +4,13 @@ const CreateThread = require('../CreateThread');
 describe('CreateThread entities', () => {
 
     it('should throw error when payload did not contain needed property', () => {
-        const payload = {title: 'title'};
-        expect(() => new CreateThread(payload)).toThrowError('CREATE_THREAD.NOT_CONTAIN_NEEDED_PROPERTY');
+        const payload = {
+            title: 'title'
+        };
+
+        expect(() => new CreateThread(payload)).toThrowError(
+            'CREATE_THREAD.NOT_CONTAIN_NEEDED_PROPERTY'
+        );
     });
     
     
@@ -13,9 +18,11 @@ describe('CreateThread entities', () => {
         const payload = {
             title : 123,
             body : true,
-            owner : 'dicoding'
+            owner : 'dicoding-123'
         };
-        expect(() => new CreateThread(payload)).toThrowError('CREATE_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION');
+        expect(() => new CreateThread(payload)).toThrowError(
+            'CREATE_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION'
+        );
     });
 
 
@@ -23,12 +30,14 @@ describe('CreateThread entities', () => {
         const payload = {
             title : 'title',
             body : 'body',
-            owner : 'dicoding'
+            owner : 'dicoding-123'
         };
-        const { title, body, owner } = new CreateThread(payload);
-        expect(title).toEqual(payload.title);
-        expect(body).toEqual(payload.body);
-        expect(owner).toEqual(payload.owner);
+        const createThread = new CreateThread(payload);
+
+        expect(createThread).toBeInstanceOf(CreateThread);
+        expect(createThread.title).toEqual(payload.title);
+        expect(createThread.body).toEqual(payload.body);
+        expect(createThread.owner).toEqual(payload.owner);
     });
 
     

@@ -3,12 +3,12 @@ const CreateThread = require('../../Domains/threads/entities/CreateThread');
 
 class AddThreadUseCase {
     constructor({ threadRepository }) {
-        this.threadRepository = threadRepository;
+        this._threadRepository = threadRepository;
        }
   
     async execute(useCasePayload) {
       const createThread = new CreateThread (useCasePayload);
-      return this.threadRepository.createThread(createThread);
+      return this._threadRepository.createThread(createThread);
     }
   
 }

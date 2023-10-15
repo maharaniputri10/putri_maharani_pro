@@ -1,5 +1,7 @@
 class CreatedThread {
-    constructor(payload) { this._verifyPayload(payload);
+    constructor(payload) { 
+        this._verifyPayload(payload);
+
         const { id, title, owner } = payload;
         this.id = id;
         this.title = title;
@@ -7,8 +9,17 @@ class CreatedThread {
     }
 
     _verifyPayload({ id, title, owner }) {
-        if(!id || !title || !owner ) {throw new Error('CREATED_THRED.NOT_CONTAIN_NEEEDED_PROPERTY')}
-        if ( typeof id !== 'string' || typeof title !== 'string' || typeof owner !== 'string' ) {throw new Error ('CREATED_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION')}
+        if(!id || !title || !owner ) {
+            throw new Error('CREATED_THRED.NOT_CONTAIN_NEEEDED_PROPERTY')
+        }
+
+        if ( 
+            typeof id !== 'string' 
+            || typeof title !== 'string' 
+            || typeof owner !== 'string' 
+        ) {
+            throw new Error ('CREATED_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION')
+        }
     }
     
 }

@@ -2,14 +2,16 @@
 const CreatedComment = require('../CreatedComment');
 
 
-describe('CreatedComment entities', () => {
+describe('a CreatedComment entities', () => {
 
     it('should throw error when payload did not contain needed property', () => {
         const payload = {
-            content: 'coment',
-            owner : 'dicoding'
+            id: 'comment-123',
+            content: 'abc'
         };
-        expect(() => new CreatedComment(payload)).toThrowError('CREATED_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY');
+        expect(() => new CreatedComment(payload)).toThrowError(
+            'CREATED_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY'
+        );
     });
 
 
@@ -19,22 +21,24 @@ describe('CreatedComment entities', () => {
             content : true,
             owner : {}
         };
-        expect(() => new CreatedComment(payload)).toThrowError('CREATED_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION');
+        expect(() => new CreatedComment(payload)).toThrowError(
+            'CREATED_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION'
+        );
     });
 
 
     it('should create CreatedComment object correctly', () => {
         const payload = {
-            id : '123',
-            content : 'komentar',
-            owner : 'dicoding'
+            id : 'comment-123',
+            content : 'dicoding komentar',
+            owner : 'dicoding-123'
         };
+
         const createdComment = new CreatedComment(payload);
+
+        expect(createdComment).toBeInstanceOf(CreatedComment);
         expect(createdComment.id).toEqual(payload.id);
         expect(createdComment.content).toEqual(payload.content);
         expect(createdComment.owner).toEqual(payload.owner);
-    });
-
-
-    
+    }); 
 });

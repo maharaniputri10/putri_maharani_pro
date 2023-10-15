@@ -1,4 +1,4 @@
-
+/**testing */
 
 const pool = require('../../database/postgres/pool');
 const createServer = require('../createServer');
@@ -10,7 +10,10 @@ const ThreadsTableTestHelper = require('../../../../tests/ThreadsTableTestHelper
 
 
 describe('/threads endpoint', () => {
-    afterAll(async () => { await pool.end()});
+    afterAll(async () => {
+       await pool.end()
+    });
+
     afterEach(async () => {
       await UsersTableTestHelper.cleanTable();
       await ThreadsTableTestHelper.cleanTable();
@@ -19,7 +22,12 @@ describe('/threads endpoint', () => {
 
 describe('when POST /threads', () => {
   it('should response 201 and added thread', async () => {
-    const Requestpayload = {title: 'title', body: 'body' };
+
+    const Requestpayload = {
+      title: 'dicoding',
+      body: 'Dicoding Indonesia' 
+    };
+
     const accessToken = await ServerTestHelper.getAccessToken();
     const server = await createServer(container);
 
@@ -27,7 +35,9 @@ describe('when POST /threads', () => {
       method: 'POST',
       url: '/threads',
       payload: requestPayload,
-      headers: { Authorization: `Bearer ${accessToken}`}
+      headers: { 
+        Authorization: `Bearer ${accessToken}`
+      }
     });
 
     const responseJson = JSON.parse(response.payload);
@@ -38,7 +48,9 @@ describe('when POST /threads', () => {
 
 
   it('should response 400 when request payload not contain needed property', async () => {
-    const requestPayload = {title:  'Title'};
+    const requestPayload = {
+      title:  'Dicoding Indonesia'
+    };
     const accessToken = await ServerTestHelper.getAccessToken();
     const server = await createServer(container);
 
@@ -46,8 +58,11 @@ describe('when POST /threads', () => {
       method: 'POST',
       url: '/threads',
       payload: requestPayload,
-      headers: { Authorization: `Bearer ${accessToken}`}
+      headers: {
+         Authorization: `Bearer ${accessToken}`
+        }
     });
+
     const responseJson = JSON.parse(response.payload);
     expect(response.statusCode).toEqual(400);
     expect(responseJson.status).toEqual('fail');
@@ -56,7 +71,11 @@ describe('when POST /threads', () => {
 
 
   it('should response 400 when request payload not meet data type specification', async () => {
-    const requestPayload = { title: 123, body: 'body'};
+    const requestPayload = {
+      title: dicoding,
+      body: 'Dicoding Indonesia'
+    };
+
     const accessToken = await ServerTestHelper.getAccessToken();
     const server = await createServer(container);
 
@@ -77,10 +96,19 @@ describe('when POST /threads', () => {
 
 describe('when GET /threads/{threadId}', () => {
   it('should response 200 and show threadById', async () => {
-    const threadId = '123';
-    await UsersTableTestHelper.addUser({ id: '123' });
-    await ThreadsTableTestHelper.addThread
-    ({ id: 123, owner: 'dicoding' });
+
+    const threadId = 'thread-123';
+
+    await UsersTableTestHelper.addUser(
+      { id: 'thread-123' }
+    );
+
+    await ThreadsTableTestHelper.addThread(
+      { 
+        id: threadId, 
+        owner: 'dicoding-123' 
+      }
+    );
     const server = await createServer(container);
 
     const response = await server.inject({
@@ -96,7 +124,8 @@ describe('when GET /threads/{threadId}', () => {
 
 
   it('should response 404 when requested thread not found', async () => {
-    const threadId = '123';
+    const threadId = 'thread-123';
+
     const server = await createServer(container);
     const response = await server.inject({
       method: 'GET',
@@ -107,9 +136,7 @@ describe('when GET /threads/{threadId}', () => {
     expect(response.statusCode).toEqual(404);
     expect(responseJson.status).toEqual('fail');
     expect(responseJson.message).toEqual('oops..,thread tidak ditemukan');
-       
-  
-  });
+        
+      });
    });
-
 });

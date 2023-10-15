@@ -1,24 +1,20 @@
-
-
 const pool = require('../src/Infrastructures/database/postgres/pool');
 
 const RepliesTableTestHelper = {
   async addReply({
-    id = '123',
-    content = 'konten',
-    owner = 'dicoding',
-    commentId = '123',
+    id = 'reply-123',
+    content = 'dicoding',
+    owner = 'dicoding-123',
+    commentId = 'comment-123',
     isDelete = 'false',
     date = 'date tes'
     
   }) {
     const query = {
-      text: 'INSERT INTO replies VALUES($1, $2, $3, $4, $5, $6) RETURNING id, thread_id, owner, date',
-      values: [id, content, owner, commentId, isDelete, date ]
+      text: 'INSERT INTO replies VALUES($1, $2, $3, $4, $5, $6)',
+      values: [id, content, owner, commentId, isDelete, date],
     };
-
-    const result = await pool.query(query);
-    return result.rows[0];
+    await pool.query(query);
   },
 
 

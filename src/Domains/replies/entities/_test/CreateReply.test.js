@@ -1,30 +1,43 @@
 const CreateReply = require('../CreateReply');
 
-describe('CreateReply entities', () => {
+describe('a CreateReply entities', () => {
 
     it('should throw error when payload did not contain needed property', () => {
-        const payload = { content: 'Konten' };
-        expect(() => new CreateReply(payload)).toThrowError('CREATE_REPLY.NOT_CONTAIN_NEEDED_PROPERTY');
+        const payload = { 
+            content: 'Konten' 
+        };
+
+        expect(() => new CreateReply(payload)).toThrowError(
+            'CREATE_REPLY.NOT_CONTAIN_NEEDED_PROPERTY'
+        );
     });
     
+
     it('should throw error when payload did not meet data type specification', () => {
         const payload = {
-            commentId: true,
             content: true,
-            owner: 'dicoding'
+            owner: { id: 'dicoding-123' },
+            commentId: 'comment-123',
         };
-        expect(() => new CreateReply(payload)).toThrowError('CREATE_REPLY.NOT_MEET_DATA_TYPE_SPECIFICATION');
+
+        expect(() => new CreateReply(payload)).toThrowError(
+            'CREATE_REPLY.NOT_MEET_DATA_TYPE_SPECIFICATION'
+        );
     });
+
 
     it('should create CreateReply object correctly', () => {
         const payload = {
-            commentId: 'comment',
-            content: 'konten',
-            owner: 'dicoding'
+            content: 'content comment',
+            owner: 'dicoding-123',
+            commentId: 'comment-123',
         };
-        const { commentId, content, owner } = new CreateReply(payload);
-        expect(commentId).toEqual(payload.commentId);
-        expect(content).toEqual(payload.content);
-        expect(owner).toEqual(payload.owner);
+
+        const createReply = new CreateReply(payload);
+
+        expect(createReply).toBeInstanceOf(CreateReply);
+        expect(createReply.content).toEqual(payload.content);
+        expect(createReply.owner).toEqual(payload.owner);
+        expect(createReply.commentId).toEqual(payload.commentId);
     });
 });

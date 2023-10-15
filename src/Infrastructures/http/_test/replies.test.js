@@ -1,4 +1,4 @@
-
+/**testing */
 
 const pool = require('../../database/postgres/pool');
 const container = require('../../container');
@@ -14,24 +14,33 @@ describe('/threads/{threadId}/comments/{commentId}/replies endpoint', () => {
     
     afterAll(async () => {await pool.end()});
     afterEach(async () => {
-        await CommentsTableTestHelper.cleanTable();
-        await RepliesTableTestHelper.cleanTable();
-        await UsersTableTestHelper.cleanTable();
-        await ThreadsTableTestHelper.cleanTable();
+      await UsersTableTestHelper.cleanTable();
+      await ThreadsTableTestHelper.cleanTable();
+      await CommentsTableTestHelper.cleanTable();
+      await RepliesTableTestHelper.cleanTable();
         
     });
 
 
 describe('when POST /threads/{threadId}/comments/{commentId}/replies', () => {
     it('should response 201 and persisted reply', async () => {
-      const requestPayload = { content: 'Reply ' };
+
+      const requestPayload = { 
+        content: 'Dicoding Indonesia ' 
+      };
+
       const accessToken = await ServerTestHelper.getAccessToken();
       const server = await createServer(container);
-      const threadId = '123';
-      const commentId = '123';
+      const threadId = 'thread-123';
+      const commentId = 'comment-123';
 
-      await ThreadsTableTestHelper.addThread({ id: threadId });
-      await CommentsTableTestHelper.addComment({ id: commentId, threadId });
+      await ThreadsTableTestHelper.addThread(
+        { id: threadId }
+      );
+
+      await CommentsTableTestHelper.addComment(
+        { id: commentId, threadId }
+      );
       
       const response = await server.inject({
             method: 'POST',
@@ -50,11 +59,17 @@ describe('when POST /threads/{threadId}/comments/{commentId}/replies', () => {
       const requestPayload = {};
       const accessToken = await ServerTestHelper.getAccessToken();
       const server = await createServer(container);
-      const threadId = '123';
-      const commentId = '123';
 
-      await ThreadsTableTestHelper.addThread({ id: threadId });
-      await CommentsTableTestHelper.addComment({ id: commentId, threadId });
+      const threadId = 'thread-123';
+      const commentId = 'comment-123';
+
+      await ThreadsTableTestHelper.addThread(
+        { id: threadId }
+      );
+
+      await CommentsTableTestHelper.addComment(
+        { id: commentId, threadId }
+      );
 
      
       const response = await server.inject({
@@ -76,11 +91,17 @@ describe('when POST /threads/{threadId}/comments/{commentId}/replies', () => {
       const requestPayload = { content: 123 };
       const accessToken = await ServerTestHelper.getAccessToken();
       const server = await createServer(container);
-      const threadId = '123';
-      const commentId = '123';
 
-      await ThreadsTableTestHelper.addThread({ id: threadId });
-      await CommentsTableTestHelper.addComment({ id: commentId, threadId });
+      const threadId = 'thread-123';
+      const commentId = 'comment-123';
+
+      await ThreadsTableTestHelper.addThread(
+        { id: threadId }
+      );
+
+      await CommentsTableTestHelper.addComment(
+        { id: commentId, threadId }
+      );
 
       
       const response = await server.inject({
@@ -105,14 +126,20 @@ describe('when POST /threads/{threadId}/comments/{commentId}/replies', () => {
       const accessToken = await ServerTestHelper.getAccessToken();
       const server = await createServer(container);
 
-      const threadId = '123';
-      await ThreadsTableTestHelper.addThread({ id: threadId });
+      const threadId = 'thread-123';
+      await ThreadsTableTestHelper.addThread(
+        { id: threadId }
+      );
 
-      const commentId = '123';
-      await CommentsTableTestHelper.addComment({ id: commentId, threadId });
+      const commentId = 'comment-123';
+      await CommentsTableTestHelper.addComment(
+        { id: commentId, threadId }
+      );
       
-      const replyId = '123';
-      await RepliesTableTestHelper.addReply({ id: replyId, commentId });
+      const replyId = 'reply-123';
+      await RepliesTableTestHelper.addReply(
+        { id: replyId, commentId }
+      );
 
       const response = await server.inject({
         method: 'DELETE',
@@ -131,22 +158,32 @@ describe('when POST /threads/{threadId}/comments/{commentId}/replies', () => {
       const server = await createServer(container);
 
       const anotherUserId = 'userNotOwner';
-      await UsersTableTestHelper.addUser({ id: anotherUserId, username: 'userNotOwner' });
+      await UsersTableTestHelper.addUser(
+        { id: anotherUser, username: 'userNotOwner' }
+      );
       
-      const threadId = '123';
-      await ThreadsTableTestHelper.addThread({ id: threadId });
+      const threadId = 'thread-123';
+      await ThreadsTableTestHelper.addThread(
+        { id: threadId }
+      );
       
-      const commentId = '123';
-      await CommentsTableTestHelper.addComment({ id: commentId, threadId });
+      const commentId = 'comment-123';
+      await CommentsTableTestHelper.addComment(
+        { id: commentId, threadId }
+      );
       
-      const replyId = '123';
-      await RepliesTableTestHelper.addReply({ id: replyId, commentId, owner: anotherUserId });
+      const replyId = 'reply-123';
+      await RepliesTableTestHelper.addReply(
+        { id: replyId, commentId, owner: anotherUser }
+      );
 
       
       const response = await server.inject({
         method: 'DELETE',
         url: `/threads/${threadId}/comments/${commentId}/replies/${replyId}`,
-        headers: { Authorization: `Bearer ${accessToken}`},
+        headers: { 
+          Authorization: `Bearer ${accessToken}`
+        }
       });
 
       
@@ -160,14 +197,17 @@ describe('when POST /threads/{threadId}/comments/{commentId}/replies', () => {
     it('should response 404 when thread or comment does not exist', async () => {
       const accessToken = await ServerTestHelper.getAccessToken();
       const server = await createServer(container);
-      const threadId = '123';
-      const commentId = '123';
-      const replyId = '123';
+
+      const threadId = 'thread-123';
+      const commentId = 'comment-123';
+      const replyId = 'reply-123';
 
       const response = await server.inject({
         method: 'DELETE',
         url: `/threads/${threadId}/comments/${commentId}/replies/${replyId}`,
-        headers: { Authorization: `Bearer ${accessToken}`},
+        headers: { 
+          Authorization: `Bearer ${accessToken}`
+        },
       });
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(404);

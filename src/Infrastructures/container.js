@@ -1,5 +1,3 @@
-
-
 /* istanbul ignore file */
 
 const { createContainer } = require('instances-container');
@@ -34,7 +32,7 @@ const RefreshAuthenticationUseCase = require('../Applications/use_case/RefreshAu
 const AddThreadUseCase = require('../Applications/use_case/AddThreadUseCase');
 const AddCommentUseCase = require('../Applications/use_case/AddCommentUseCase');
 const DeleteCommentUseCase = require('../Applications/use_case/DeleteCommentUseCase');
-const ShowThreadUseCase = require('../Applications/use_case/ShowThreadUseCase');
+const GetThreadUseCase = require('../Applications/use_case/GetThreadUseCase');
 const AddReplyUseCase = require('../Applications/use_case/AddReplyUseCase');
 const DeleteReplyUseCase = require('../Applications/use_case/DeleteReplyUseCase');
 
@@ -257,8 +255,8 @@ container.register([
     },
   },
   {
-    key: ShowThreadUseCase.name,
-    Class: ShowThreadUseCase,
+    key: GetThreadUseCase.name,
+    Class: GetThreadUseCase,
     parameter: {
       injectType: 'destructuring',
       dependencies: [

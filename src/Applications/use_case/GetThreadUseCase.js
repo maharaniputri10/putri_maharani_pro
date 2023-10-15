@@ -1,20 +1,23 @@
-class ShowThreadUseCase {
+
+
+class GetThreadUseCase {
   constructor({ threadRepository, commentRepository, replyRepository }) {
-    this.threadRepository = threadRepository;
-    this.commentRepository = commentRepository;
-    this.replyRepository = replyRepository;
+    this._threadRepository = threadRepository;
+    this._commentRepository = commentRepository;
+    this._replyRepository = replyRepository;
   }
 
+
   async execute(useCasePayload) {
-    const thread = await this.threadRepository.getThreadById(useCasePayload);
-    const comments = await this.commentRepository.getCommentsByThreadId(useCasePayload);
-    const replies = await this.replyRepository.getRepliesByThreadId(useCasePayload);
+    const thread = await this._threadRepository.getThreadById(useCasePayload);
+    const comments = await this._commentRepository.getCommentsByThreadId(useCasePayload);
+    const replies = await this._replyRepository.getRepliesByThreadId(useCasePayload);
 
     const validatedComments = this._validateDeletedComment(comments);
     const validatedReplies = this._validateDeletedReply(replies);
-    const commentsAndReplies = this._addReplyToComment(validatedComments, validatedReplies);
-    return commentsAndReplies;
+    
   }
+
 
   _validateDeletedComment(comments) {
     for (const comment of comments) {
@@ -26,6 +29,7 @@ class ShowThreadUseCase {
     return comments;
   }
 
+
   _validateDeletedReply(replies) {
     for (const reply of replies) {
       if (reply.is_delete) {
@@ -35,6 +39,7 @@ class ShowThreadUseCase {
     }
     return replies;
   }
+
 
   _addReplyToComment(comments, replies) {
     for (const comment of comments) {
@@ -50,4 +55,4 @@ class ShowThreadUseCase {
   }
 }
 
-module.exports = ShowThreadUseCase;
+module.exports = GetThreadUseCase;

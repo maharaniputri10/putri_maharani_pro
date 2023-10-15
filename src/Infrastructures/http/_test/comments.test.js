@@ -7,9 +7,12 @@ const ThreadsTableTestHelper = require('../../../../tests/ThreadsTableTestHelper
 const CommentsTableTestHelper = require('../../../../tests/CommentsTableTestHelper');
 
 
-describe('/threads/comments/... endpoint', () => {
+describe('/threads/{threadId}/comments/... endpoint', () => {
 
-  afterAll(async () => { await pool.end() });
+  afterAll(async () => {
+     await pool.end()
+  });
+
   afterEach(async () => {
     await UsersTableTestHelper.cleanTable();
     await ThreadsTableTestHelper.cleanTable();
@@ -19,13 +22,14 @@ describe('/threads/comments/... endpoint', () => {
   
   describe('when POST threads By comments', () => {
     it('should response 201 and persisted comment', async () => {
+    
       const requestPayload = {
-         content: 'Comment content'
+         content: 'content'
       };
       const accessToken = await ServerTestHelper.getAccessToken();
       const server = await createServer(container);
 
-      const threadId = '123';
+      const threadId = 'thread-123';
       await ThreadsTableTestHelper.addThread
       ({
          id: threadId 
@@ -50,7 +54,8 @@ describe('/threads/comments/... endpoint', () => {
       const requestPayload = {};
       const accessToken = await ServerTestHelper.getAccessToken();
       const server = await createServer(container);
-      const threadId = '123';
+
+      const threadId = 'thread-123';
       await ThreadsTableTestHelper.addThread
       ({ 
         id: threadId
@@ -73,8 +78,10 @@ describe('/threads/comments/... endpoint', () => {
     it('should response 400 when request payload not meet data type specification', async () => {
       const requestPayload = { content: 123 };
       const accessToken = await ServerTestHelper.getAccessToken();
+
       const server = await createServer(container);
-      const threadId = '123';
+
+      const threadId = 'thread-123';
       await ThreadsTableTestHelper.addThread({ id: threadId });
 
       const response = await server.inject({
@@ -91,14 +98,14 @@ describe('/threads/comments/... endpoint', () => {
   });
 
 
-  describe('when DELETE threads By commentId}', () => {
+  describe('when DELETE /threads/{threadId}/comments/{commentId}', () => {
    
     it('should response 201 and delete comment successfully', async () => {
       const accessToken = await ServerTestHelper.getAccessToken();
       const server = await createServer(container);
-      const threadId = '123';
+      const threadId = 'thread-123';
       await ThreadsTableTestHelper.addThread({ id: threadId });
-      const commentId = '123';
+      const commentId = 'comment-123';
       await CommentsTableTestHelper.addComment
       ({ id: commentId, threadId });
 
@@ -124,9 +131,9 @@ describe('/threads/comments/... endpoint', () => {
         username: 'userNotOwner'
       });
 
-      const threadId = '123';
+      const threadId = 'thread-123';
       await ThreadsTableTestHelper.addThread({ id: threadId });
-      const commentId = '123';
+      const commentId = 'comment-123';
       await CommentsTableTestHelper.addComment({ id: commentId, threadId, owner: anotherUserId });
 
       const response = await server.inject({
@@ -145,8 +152,8 @@ describe('/threads/comments/... endpoint', () => {
     it('should response 404 when thread or comment does not exist', async () => {
       const accessToken = await ServerTestHelper.getAccessToken();
       const server = await createServer(container);
-      const threadId = '90';
-      const commentId = '02';
+      const threadId = 'thread-1234';
+      const commentId = 'comment-02';
 
       const response = await server.inject({
         method: 'DELETE',
