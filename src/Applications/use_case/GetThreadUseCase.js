@@ -25,7 +25,7 @@ class GetThreadUseCase {
   _validateDeletedComment(comments) {
     for (const comment of comments) {
       if (comment.is_delete) {
-        comment.content = 'comment dihapus';
+        comment.content = '**komentar telah dihapus**';
       }
       delete comment.is_delete;
     }
@@ -36,7 +36,7 @@ class GetThreadUseCase {
   _validateDeletedReply(replies) {
     for (const reply of replies) {
       if (reply.is_delete) {
-        reply.content = 'reply dihapus';
+        reply.content = '**balasan telah dihapus**';
       }
       delete reply.is_delete;
     }
