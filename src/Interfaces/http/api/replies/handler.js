@@ -19,13 +19,21 @@ class RepliesHandler {
 
     const addReplyUseCase = this._container.getInstance(AddReplyUseCase.name);
    
-    const addedReply = await addReplyUseCase.addReply(
+    // const addedReply = await addReplyUseCase.addReply(
+    //   {
+    //     content,
+    //     threadId,
+    //     commentId,
+    //     owner: userId
+    //   }
+    // );
+    const addedReply = await addReplyUseCase.execute(
       {
-        content,
-        threadId,
-        commentId,
-        owner: userId
-      }
+      content, 
+      owner: userId, 
+      threadId, 
+      commentId,
+    }
     );
 
     const response = h.response({

@@ -1,5 +1,3 @@
-
-
 class GetThreadUseCase {
   constructor({ threadRepository, commentRepository, replyRepository }) {
     this._threadRepository = threadRepository;
@@ -11,6 +9,7 @@ class GetThreadUseCase {
   async execute(useCasePayload) {
     const thread = await this._threadRepository.getThreadById(useCasePayload);
     const comments = await this._commentRepository.getCommentsByThreadId(useCasePayload);
+    console.log(comments);
     const replies = await this._replyRepository.getReplyByThreadId(useCasePayload);
 
     const validatedComments = this._validateDeletedComment(comments);

@@ -63,7 +63,7 @@ class CommentRepositoryPostgres extends CommentRepository {
   async verifyCommentIsExist(commentId) {
     const query = {
       text: 'SELECT id FROM comments WHERE id = $1',
-      values: [commentId]
+      values: [commentId],
     };
 
     const result = await this._pool.query(query);
@@ -79,12 +79,12 @@ class CommentRepositoryPostgres extends CommentRepository {
       text: 'SELECT id FROM comments WHERE id = $1 AND owner= $2',
       values: [commentId, owner],
     };
-    console.log(query.values);
+    // console.log(query.values);
 
     const result = await this._pool.query(query);
 
     if (!result.rowCount) {
-      throw new AuthorizationError(`Anda tidak dapat mengakses komentar ini!`);
+      throw new AuthorizationError('Anda tidak dapat mengakses komentar ini!');
     }
   }
 }
