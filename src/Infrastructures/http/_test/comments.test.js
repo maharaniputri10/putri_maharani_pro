@@ -7,7 +7,7 @@ const ThreadsTableTestHelper = require('../../../../tests/ThreadsTableTestHelper
 const CommentsTableTestHelper = require('../../../../tests/CommentsTableTestHelper');
 
 
-describe('/threads/{threadId}/comments/... endpoint', () => {
+describe('/thread endpoint', () => {
 
   afterAll(async () => {
      await pool.end()
@@ -20,11 +20,11 @@ describe('/threads/{threadId}/comments/... endpoint', () => {
   });
 
   
-  describe('when POST threads By comments', () => {
+  describe('when POST /threads/{threadId}/comments', () => {
     it('should response 201 and persisted comment', async () => {
     
       const requestPayload = {
-         content: 'content'
+         content: 'Dicoding Indonesia'
       };
       const accessToken = await ServerTestHelper.getAccessToken();
       const server = await createServer(container);
@@ -71,7 +71,7 @@ describe('/threads/{threadId}/comments/... endpoint', () => {
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(400);
       expect(responseJson.status).toEqual('fail');
-      expect(responseJson.message).toEqual('Sorry, tidak dapat membuat komentar baru');
+      expect(responseJson.message).toEqual('silahkan lengkapi properti yang dibutuhkan');
     });
 
 
@@ -82,7 +82,10 @@ describe('/threads/{threadId}/comments/... endpoint', () => {
       const server = await createServer(container);
 
       const threadId = 'thread-123';
-      await ThreadsTableTestHelper.addThread({ id: threadId });
+      await ThreadsTableTestHelper.addThread
+      (
+        { id: threadId }
+      );
 
       const response = await server.inject({
         method: 'POST',
@@ -100,7 +103,7 @@ describe('/threads/{threadId}/comments/... endpoint', () => {
 
   describe('when DELETE /threads/{threadId}/comments/{commentId}', () => {
    
-    it('should response 201 and delete comment successfully', async () => {
+    it('should response 201 and comment deleted', async () => {
       const accessToken = await ServerTestHelper.getAccessToken();
       const server = await createServer(container);
       const threadId = 'thread-123';
@@ -121,7 +124,7 @@ describe('/threads/{threadId}/comments/... endpoint', () => {
     });
 
 
-    it('should response 403 when user is not an authorized owner of the comment', async () => {
+    it('should response 403 when wrong user', async () => {
       const accessToken = await ServerTestHelper.getAccessToken();
       const server = await createServer(container);
       const anotherUser = 'userNotOwner';
@@ -149,11 +152,11 @@ describe('/threads/{threadId}/comments/... endpoint', () => {
     });
 
 
-    it('should response 404 when thread or comment does not exist', async () => {
+    it('should response 404 when thread or comment not found', async () => {
       const accessToken = await ServerTestHelper.getAccessToken();
       const server = await createServer(container);
-      const threadId = 'thread-1234';
-      const commentId = 'comment-02';
+      const threadId = 'thread-123';
+      const commentId = 'comment-123';
 
       const response = await server.inject({
         method: 'DELETE',
@@ -163,7 +166,7 @@ describe('/threads/{threadId}/comments/... endpoint', () => {
 
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(404);
-      expect(responseJson.status).toEqual('error');
+      expect(responseJson.status).toEqual('fail');
       expect(responseJson.message).toBeDefined();
     });
   });

@@ -5,8 +5,8 @@ const ThreadsTableTestHelper = {
     id = 'thread-123',
     title = 'dicoding',
     body = 'lorem ipsum',
-    owner = 'dicoding-123',
-    date = 'date tes' 
+    owner = 'user-123',
+    date = 'date testing' 
   }) {
     const query = {
       text: 'INSERT INTO threads VALUES($1, $2, $3, $4, $5)',
@@ -30,5 +30,6 @@ const ThreadsTableTestHelper = {
     await pool.query('DELETE FROM threads WHERE 1=1');
   }
 };
+
 
 module.exports = ThreadsTableTestHelper;

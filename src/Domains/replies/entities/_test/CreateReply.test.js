@@ -16,7 +16,7 @@ describe('a CreateReply entities', () => {
     it('should throw error when payload did not meet data type specification', () => {
         const payload = {
             content: true,
-            owner: { id: 'dicoding-123' },
+            owner: { id: 'user-123' },
             commentId: 'comment-123',
         };
 
@@ -29,8 +29,8 @@ describe('a CreateReply entities', () => {
     it('should create CreateReply object correctly', () => {
         const payload = {
             content: 'content comment',
-            owner: 'dicoding-123',
-            commentId: 'comment-123',
+            owner: 'user-123',
+            commentId: 'comment-123'
         };
 
         const createReply = new CreateReply(payload);

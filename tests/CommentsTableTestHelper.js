@@ -4,10 +4,10 @@ const CommentsTableTestHelper = {
   async addComment({
     id = 'comment-123',
     content = 'dicoding',
-    owner = 'dicoding-123',
+    owner = 'user-123',
     threadId = 'thread-123',
     isDelete = false,
-    date = 'date tes'
+    date = 'date testing'
     
   }) {
     const query = {
@@ -31,7 +31,7 @@ const CommentsTableTestHelper = {
   
   async cleanTable() {
     await pool.query('DELETE FROM comments WHERE 1=1');
-  },
+  }
 };
 
 module.exports = CommentsTableTestHelper;

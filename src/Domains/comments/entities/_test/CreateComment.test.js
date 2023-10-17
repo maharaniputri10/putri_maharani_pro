@@ -4,18 +4,18 @@ describe(' a CreateComment entities', () => {
     
     it('should throw error when payload did not contain needed property', () => {
         const payload = {
-            content: 'content Comment'
+            content: 'Dicoding Indo'
         };
         expect(() => new CreateComment(payload)).toThrowError(
             'CREATE_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY',
-            );
+        );
     });
     
     
     it('should throw error when payload did not meet data type specification', () => {
         const payload = {
             content: true,
-            owner: { id: 'dicoding-123' },
+            owner: { id: 'user-123' },
             threadId: 'thread-123'
         };
 
@@ -25,12 +25,12 @@ describe(' a CreateComment entities', () => {
     });
 
 
-    it('should create CreateComment object correctly', () => {
+    it('should create CreateComment object  correctly', () => {
         const payload = {
-            content: 'content comment',
-            owner: 'dicoding-123',
+            content: 'Dicod content',
+            owner: 'user-123',
             threadId: 'thread-123',
-          };
+        };
 
         const createComment = new CreateComment(payload);
 

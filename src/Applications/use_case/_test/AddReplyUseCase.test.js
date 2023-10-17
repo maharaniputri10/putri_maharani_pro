@@ -1,8 +1,8 @@
+const ReplyRepository = require('../../../Domains/replies/ReplyRepository');
+const CommentRepository = require('../../../Domains/comments/CommentRepository');
 const CreateReply = require('../../../Domains/replies/entities/CreateReply');
 const CreatedReply = require('../../../Domains/replies/entities/CreatedReply');
-const CommentRepository = require('../../../Domains/comments/CommentRepository');
 const ThreadRepository = require('../../../Domains/threads/ThreadRepository');
-const ReplyRepository = require('../../../Domains/replies/ReplyRepository');
 const AddReplyUseCase = require('../AddReplyUseCase');
 
 
@@ -10,9 +10,8 @@ describe('AddReplyUseCase', () => {
 
         it('should orchestrating the add reply action correctly', async () => {
         const useCasePayload = {
-          threadId: 'thread-123',
           content: 'ini content',
-          owner: 'dicoding-123',
+          owner: 'user-123',
           commentId: 'comment-123'
           
         };
@@ -21,44 +20,51 @@ describe('AddReplyUseCase', () => {
             id: 'reply-123',
             content: useCasePayload.content,
             owner: useCasePayload.owner
-          });
+        });
 
         const mockReplyRepository = new ReplyRepository();
-        const mockThreadRepository = new ThreadRepository();
         const mockCommentRepository = new CommentRepository();
+        const mockThreadRepository = new ThreadRepository();
 
         mockThreadRepository.verifyThreadIsExist = jest
         .fn()
         .mockImplementation(() => Promise.resolve());
         mockCommentRepository.verifyCommentIsExist = jest
-        .fn().mockImplementation(() => Promise.resolve());
+        .fn()
+        .mockImplementation(() => Promise.resolve());
         mockReplyRepository.createReply = jest
-        .fn().mockImplementation(() => Promise.resolve(mockAddedReply));
+        .fn()
+        .mockImplementation(() => Promise.resolve(new CreatedReply(
+          {
+          id: 'reply-123',
+          content: useCasePayload.content,
+          owner: useCasePayload.owner,
+          }
+        )));
 
-        const addReplyUseCase = new AddReplyUseCase({
-                commentRepository: mockCommentRepository,
-                replyRepository: mockReplyRepository,
-                threadRepository: mockThreadRepository
+        const addReplyUseCase = new AddReplyUseCase({ 
+          commentRepository: mockCommentRepository,
+          replyRepository: mockReplyRepository,
+          threadRepository: mockThreadRepository,    
         });
+
         const addedReply = await addReplyUseCase.execute(useCasePayload);
 
-        expect(addedReply).toStrictEqual(expectedAddedReply);
-
+        expect(addedReply).toStrictEqual(
+          mockAddedReply
+        );
         expect(mockThreadRepository.verifyThreadIsExist).toBeCalledWith(
           useCasePayload.threadId,
-          );
+        );
         expect(mockCommentRepository.verifyCommentIsExist).toBeCalledWith(
           useCasePayload.commentId,
-          );
+        );
         expect(mockReplyRepository.createReply).toBeCalledWith(
           new CreateReply({
-            threadId: useCasePayload.threadId,
             content: useCasePayload.content,
             owner: useCasePayload.owner,
             commentId: useCasePayload.commentId
-        }),
-        );
-      });
-
-});
+        }));
+    });
+  });
     

@@ -4,21 +4,21 @@ const RepliesTableTestHelper = {
   async addReply({
     id = 'reply-123',
     content = 'dicoding',
-    owner = 'dicoding-123',
+    owner = 'user-123',
     commentId = 'comment-123',
     isDelete = 'false',
-    date = 'date tes'
+    date = 'date testing'
     
   }) {
     const query = {
       text: 'INSERT INTO replies VALUES($1, $2, $3, $4, $5, $6)',
-      values: [id, content, owner, commentId, isDelete, date],
+      values: [id, content, owner, commentId, isDelete, date]
     };
     await pool.query(query);
   },
 
 
-  async findRepliesById(id) {
+  async findReplyById(id) {
     const query = {
       text: 'SELECT * FROM replies WHERE id = $1',
       values: [id]

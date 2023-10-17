@@ -1,11 +1,9 @@
-/**testing */
-
 const pool = require('../../database/postgres/pool');
-const createServer = require('../createServer');
 const container = require('../../container');
+const createServer = require('../createServer');
+const ThreadsTableTestHelper = require('../../../../tests/ThreadsTableTestHelper');
 const ServerTestHelper = require('../../../../tests/ServerTestHelper');
 const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
-const ThreadsTableTestHelper = require('../../../../tests/ThreadsTableTestHelper');
 
 
 
@@ -21,9 +19,9 @@ describe('/threads endpoint', () => {
 
 
 describe('when POST /threads', () => {
-  it('should response 201 and added thread', async () => {
+  it('should response 201 and persisted thread', async () => {
 
-    const Requestpayload = {
+    const requestPayload = {
       title: 'dicoding',
       body: 'Dicoding Indonesia' 
     };
@@ -66,14 +64,14 @@ describe('when POST /threads', () => {
     const responseJson = JSON.parse(response.payload);
     expect(response.statusCode).toEqual(400);
     expect(responseJson.status).toEqual('fail');
-    expect(responseJson.message).toEqual('Silahkan masukkan property yang dibutuhkan untuk membuat thread baru');
+    expect(responseJson.message).toEqual('tidak dapat membuat thread baru silahkan kirimkan title & body');
   });
 
 
   it('should response 400 when request payload not meet data type specification', async () => {
     const requestPayload = {
-      title: dicoding,
-      body: 'Dicoding Indonesia'
+      title: 910,
+      body: ['abbjuyo']
     };
 
     const accessToken = await ServerTestHelper.getAccessToken();
@@ -89,24 +87,24 @@ describe('when POST /threads', () => {
     const responseJson = JSON.parse(response.payload);
     expect(response.statusCode).toEqual(400);
     expect(responseJson.status).toEqual('fail');
-    expect(responseJson.message).toEqual(' tipe data yang anda masukkan tidak sesuai');
+    expect(responseJson.message).toEqual('tipe data tidak sesuai');
   });
 });
 
 
 describe('when GET /threads/{threadId}', () => {
-  it('should response 200 and show threadById', async () => {
+  it('should response 200 and get thread by id', async () => {
 
     const threadId = 'thread-123';
 
     await UsersTableTestHelper.addUser(
-      { id: 'thread-123' }
+      { id: 'user-123' }
     );
 
     await ThreadsTableTestHelper.addThread(
       { 
         id: threadId, 
-        owner: 'dicoding-123' 
+        owner: 'user-123' 
       }
     );
     const server = await createServer(container);
@@ -135,8 +133,8 @@ describe('when GET /threads/{threadId}', () => {
     const responseJson = JSON.parse(response.payload);
     expect(response.statusCode).toEqual(404);
     expect(responseJson.status).toEqual('fail');
-    expect(responseJson.message).toEqual('oops..,thread tidak ditemukan');
+    expect(responseJson.message).toEqual('thread tidak ditemukan');
         
-      });
-   });
+    });
+  });
 });

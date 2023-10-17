@@ -10,7 +10,7 @@ class CreatedComment {
 
     _verifyPayload({ id, content, owner }) {
         if(!id || !content || !owner ) {
-            throw new Error('CREATED_COMMENT.NOT_CONTAIN_NEEEDED_PROPERTY')
+            throw new Error('CREATED_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY')
         }
         if ( typeof id !== 'string' 
         || typeof content !== 'string' 

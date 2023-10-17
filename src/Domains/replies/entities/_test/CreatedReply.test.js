@@ -1,7 +1,7 @@
 const CreatedReply = require('../CreatedReply');
 
 
-describe('CreatedReply entities', () => {
+describe('a CreatedReply entities', () => {
 
     it('should throw error when payload did not contain needed property', () => {
         const payload = {
@@ -30,7 +30,7 @@ describe('CreatedReply entities', () => {
         const payload = {
             id : 'reply-123',
             content : 'kontent dicod',
-            owner : 'dicoding-123'
+            owner : 'user-123'
         };
 
         const createdReply = new CreatedReply(payload);
@@ -39,6 +39,4 @@ describe('CreatedReply entities', () => {
         expect(createdReply.content).toEqual(payload.content);
         expect(createdReply.owner).toEqual(payload.owner);
     });
-
-    
 });

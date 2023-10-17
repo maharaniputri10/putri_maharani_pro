@@ -1,11 +1,11 @@
 const CreateThread = require('../CreateThread');
 
 
-describe('CreateThread entities', () => {
+describe('a CreateThread entities', () => {
 
     it('should throw error when payload did not contain needed property', () => {
         const payload = {
-            title: 'title'
+            title: 'abc'
         };
 
         expect(() => new CreateThread(payload)).toThrowError(
@@ -18,7 +18,7 @@ describe('CreateThread entities', () => {
         const payload = {
             title : 123,
             body : true,
-            owner : 'dicoding-123'
+            owner : {id: 'user-123'}
         };
         expect(() => new CreateThread(payload)).toThrowError(
             'CREATE_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION'
@@ -28,9 +28,9 @@ describe('CreateThread entities', () => {
 
     it('should create CreateThread object correctly', () => {
         const payload = {
-            title : 'title',
-            body : 'body',
-            owner : 'dicoding-123'
+            title : 'dicoding',
+            body : 'Dicoding Indonesia',
+            owner : 'user-123'
         };
         const createThread = new CreateThread(payload);
 

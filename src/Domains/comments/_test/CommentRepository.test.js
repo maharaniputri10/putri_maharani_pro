@@ -2,7 +2,7 @@
 const CommentRepository = require('../CommentRepository');
 
 describe('CommentRepository interface', () => {
-    it('should trow error when invoke abstract behavior', async () => {
+    it('should throw error when invoke abstract behavior', async () => {
        
         const commentRepository =  new CommentRepository();
        
