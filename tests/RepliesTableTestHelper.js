@@ -7,7 +7,8 @@ const RepliesTableTestHelper = {
     owner = 'user-123',
     commentId = 'comment-123',
     isDelete = 'false',
-    date = 'date testing'
+    // date = 'date testing'
+    date = new Date().toISOString()
     
   }) {
     const query = {

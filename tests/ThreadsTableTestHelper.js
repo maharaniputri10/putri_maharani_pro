@@ -6,7 +6,8 @@ const ThreadsTableTestHelper = {
     title = 'dicoding',
     body = 'lorem ipsum',
     owner = 'user-123',
-    date = 'date testing' 
+    // date = 'date testing' 
+    date = new Date().toISOString()
   }) {
     const query = {
       text: 'INSERT INTO threads VALUES($1, $2, $3, $4, $5)',

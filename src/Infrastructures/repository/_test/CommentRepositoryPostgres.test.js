@@ -171,7 +171,8 @@ describe('CommentRepositoryPostgres', () => {
 
       await CommentsTableTestHelper.addComment(
         {
-        id: 'comment-123',
+        // id: 'comment-123',
+        id: 'comment-321',
         threadId,
         date: '2023-10-15T01:11:11.684Z'
         }

@@ -13,6 +13,7 @@ describe('/threads/{threadId}/comments endpoint', () => {
     afterAll(async () => {
       await pool.end()
     });
+    
     afterEach(async () => {
       await UsersTableTestHelper.cleanTable();
       await ThreadsTableTestHelper.cleanTable();

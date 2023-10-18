@@ -55,7 +55,7 @@ describe('GetThreadUseCase', () => {
     const mockGetDetails ={
         id: 'thread-123',
         title: 'title',
-        body: 'boody',
+        body: 'body',
         date: '2023-10-13T01:26:11.250Z',
         username: 'user-123',
         comments: [
@@ -77,7 +77,7 @@ describe('GetThreadUseCase', () => {
                 username: 'user-123'
               },
             ],
-            content: 'dihapus comment'
+            content: 'content'
           },
             {
               id: 'comment-456',

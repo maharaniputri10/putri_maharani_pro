@@ -37,7 +37,7 @@ describe('ReplyRepositoryPostgres', () => {
       );
 
       const createReply = new CreateReply({
-        content: 'Halloooooooooo',
+        content: 'Hallo',
         owner: 'user-123',
         commentId: 'comment-123',
       });

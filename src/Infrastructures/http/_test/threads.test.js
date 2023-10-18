@@ -134,6 +134,7 @@ describe('when GET /threads/{threadId}', () => {
     expect(response.statusCode).toEqual(404);
     expect(responseJson.status).toEqual('fail');
     expect(responseJson.message).toEqual('thread tidak ditemukan');
+    
         
     });
   });

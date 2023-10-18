@@ -7,7 +7,8 @@ const CommentsTableTestHelper = {
     owner = 'user-123',
     threadId = 'thread-123',
     isDelete = false,
-    date = 'date testing'
+    // date = 'date testing',
+    date = new Date().toISOString()
     
   }) {
     const query = {
