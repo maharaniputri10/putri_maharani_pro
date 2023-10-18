@@ -6,7 +6,6 @@ const ThreadsTableTestHelper = {
     title = 'dicoding',
     body = 'lorem ipsum',
     owner = 'user-123',
-    // date = 'date testing' 
     date = new Date().toISOString()
   }) {
     const query = {

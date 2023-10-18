@@ -10,7 +10,6 @@ class CreatedThread {
 
     _verifyPayload({ id, title, owner }) {
         if(!id || !title || !owner ) {
-            // throw new Error('CREATED_THRED.NOT_CONTAIN_NEEEDED_PROPERTY')
             throw new Error('CREATED_THREAD.NOT_CONTAIN_NEEDED_PROPERTY')
         }
 

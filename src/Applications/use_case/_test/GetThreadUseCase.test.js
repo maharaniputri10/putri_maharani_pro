@@ -13,21 +13,21 @@ describe('GetThreadUseCase', () => {
         title: 'title',
         body: 'body',
         username: 'user-123',
-        date: '2023-10-13T01:26:11.250Z'
+        date: new Date().toISOString()
       };
 
     const mockComment = [
       { 
         id: 'comment-123', 
         username: 'user-123', 
-        date: '2023-10-13T01:26:11.250Z', 
+        date: new Date().toISOString(),
         content: 'content', 
         is_delete: false 
       },
       {
         id: 'comment-456',
         username: 'user-123',
-        date: '2023-10-13T01:26:11.250Z',
+        date: new Date().toISOString(),
         content: 'Cukup OKe',
         is_delete: true
       },
@@ -37,7 +37,7 @@ describe('GetThreadUseCase', () => {
       {
         id: 'reply-123',
         content: 'content',
-        date: '2023-10-13T01:26:11.250Z',
+        date: new Date().toISOString(),
         username: 'user-123',
         is_delete: false,
         comment_id: 'comment-123' 
@@ -45,7 +45,7 @@ describe('GetThreadUseCase', () => {
       {
         id: 'reply-456',
         content: 'cukup OKe',
-        date: '2023-10-13T01:26:11.250Z',
+        date: new Date().toISOString(),
         username: 'user-123',
         is_delete: true,
         comment_id: 'comment-123',
@@ -56,24 +56,24 @@ describe('GetThreadUseCase', () => {
         id: 'thread-123',
         title: 'title',
         body: 'body',
-        date: '2023-10-13T01:26:11.250Z',
+        date: new Date().toISOString(),
         username: 'user-123',
         comments: [
           {
             id: 'comment-123',
             username: 'user-123',
-            date: '2023-10-13T01:26:11.250Z',
+            date: new Date().toISOString(),
             replies: [
               {
                 id: 'reply-123',
                 content: 'content',
-                date: '2023-10-13T01:26:11.250Z',
+                date: new Date().toISOString(),
                 username: 'user-123',
               },
               {
                 id: 'reply-456',
                 content: '**balasan telah dihapus**',
-                date: '2023-10-13T01:26:11.250Z',
+                date: new Date().toISOString(),
                 username: 'user-123'
               },
             ],
@@ -82,7 +82,7 @@ describe('GetThreadUseCase', () => {
             {
               id: 'comment-456',
               username: 'user-123',
-              date: '2023-10-13T01:26:11.250Z',
+              date: new Date().toISOString(),
               replies: [],
               content: '**komentar telah dihapus**'
             },

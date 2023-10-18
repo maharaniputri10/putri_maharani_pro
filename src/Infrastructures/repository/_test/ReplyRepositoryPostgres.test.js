@@ -58,10 +58,6 @@ describe('ReplyRepositoryPostgres', () => {
 
 
   describe('getReply By ThreadId function', () => {
-    // it('should throw NotFoundError when reply not found', async () => {
-    //   const replyRepositoryPostgres = new ReplyRepositoryPostgres(pool, {});
-    //   await expect(replyRepositoryPostgres.getRepliesByThreadId('threadId')).rejects.toThrowError(NotFoundError);
-    // });
 
     it('should return replies by thread id correctly', async () => {
       const threadId = 'thread-123';
@@ -70,7 +66,7 @@ describe('ReplyRepositoryPostgres', () => {
         content: 'untuk Dicoding',
         owner: 'user-123',
         commentId: 'comment-123',
-        date: 'data palsu',
+        date: new Date().toISOString(),
       };
       const dataOwner = {
         id: 'user-123',
@@ -220,8 +216,8 @@ describe('ReplyRepositoryPostgres', () => {
 
       await RepliesTableTestHelper.addReply(
         {
-           id: replyId, 
-           owner: 'user-123',
+          id: replyId, 
+          owner: 'user-123',
           commentId 
         }
       );
