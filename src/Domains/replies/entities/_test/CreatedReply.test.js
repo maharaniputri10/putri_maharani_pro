@@ -34,7 +34,6 @@ describe('a CreatedReply entities', () => {
         };
 
         const createdReply = new CreatedReply(payload);
-        
         expect(createdReply.id).toEqual(payload.id);
         expect(createdReply.content).toEqual(payload.content);
         expect(createdReply.owner).toEqual(payload.owner);

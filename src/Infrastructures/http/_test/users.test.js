@@ -14,6 +14,7 @@ describe('/users endpoint', () => {
 
   describe('when POST /users', () => {
     it('should response 201 and persisted user', async () => {
+    
       // Arrange
       const requestPayload = {
         username: 'dicoding',

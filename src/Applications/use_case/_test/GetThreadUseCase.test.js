@@ -13,7 +13,7 @@ describe('GetThreadUseCase', () => {
         title: 'title',
         body: 'body',
         username: 'user-123',
-        date: new Date().toISOString()
+        date: new Date().toISOString(),
       };
 
     const mockComment = [
@@ -56,28 +56,32 @@ describe('GetThreadUseCase', () => {
         id: 'thread-123',
         title: 'title',
         body: 'body',
-        date: new Date().toISOString(),
+         date: new Date().toISOString(),
+        
         username: 'user-123',
         comments: [
           {
             id: 'comment-123',
             username: 'user-123',
-            date: new Date().toISOString(),
+             date: new Date().toISOString(),
+            
             replies: [
               {
                 id: 'reply-123',
                 content: 'content',
-                date: new Date().toISOString(),
+                 date: new Date().toISOString(),
+                
                 username: 'user-123',
               },
               {
                 id: 'reply-456',
                 content: '**balasan telah dihapus**',
-                date: new Date().toISOString(),
+                 date: new Date().toISOString(),
+                
                 username: 'user-123'
               },
             ],
-            content: 'content'
+            content: 'content',
           },
             {
               id: 'comment-456',

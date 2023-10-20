@@ -10,11 +10,17 @@ const RepliesTableTestHelper = require('../../../../tests/RepliesTableTestHelper
 
 describe('/threads/{threadId}/comments endpoint', () => {
     
+    // beforeAll(async () => {
+    //   await UsersTableTestHelper.addUser();
+    //   await ThreadsTableTestHelper.addThread();
+    //   await CommentsTableTestHelper.addComment();
+    // })
+
     afterAll(async () => {
       await pool.end()
     });
     
-    afterEach(async () => {
+      afterEach(async () => {
       await UsersTableTestHelper.cleanTable();
       await ThreadsTableTestHelper.cleanTable();
       await CommentsTableTestHelper.cleanTable();
