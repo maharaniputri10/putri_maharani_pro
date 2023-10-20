@@ -171,9 +171,9 @@ describe('CommentRepositoryPostgres', () => {
 
       await CommentsTableTestHelper.addComment(
         {
-        id: 'comment-321',
+        id: 'comment-123',
         threadId,
-        date: new Date().toISOString()
+        date: new Date()
         }
       );
 
@@ -181,7 +181,7 @@ describe('CommentRepositoryPostgres', () => {
         {
         id: 'comment-321',
         threadId,
-        date: new Date().toISOString()
+        date: new Date()
         }
       );
 
@@ -198,17 +198,17 @@ describe('CommentRepositoryPostgres', () => {
         'comment-321'
       );
       expect(comments[0].date).toEqual(
-         new Date().toISOString()
+         new Date()
       );
       expect(comments[0].username).toEqual('dicoding');
-      expect(comments[0].content).toEqual('Dicoding Indonesia'); 
+      expect(comments[0].content).toEqual('dicoding'); 
       expect(comments[0].is_delete).toEqual(false);
 
       expect(comments[1].id).toEqual('comment-123');
-      expect(comments[1].date).toEqual(new Date().toISOString());
+      expect(comments[1].date).toEqual(new Date());
      
       expect(comments[1].username).toEqual('dicoding');
-      expect(comments[1].content).toEqual('Dicoding Indonesia'); 
+      expect(comments[1].content).toEqual('dicoding'); 
       expect(comments[1].is_delete).toEqual(false); 
    
     });

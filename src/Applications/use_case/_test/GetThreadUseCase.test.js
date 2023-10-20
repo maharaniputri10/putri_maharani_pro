@@ -13,21 +13,21 @@ describe('GetThreadUseCase', () => {
         title: 'title',
         body: 'body',
         username: 'user-123',
-        date: new Date().toISOString(),
+        date: new Date()
       };
 
     const mockComment = [
       { 
         id: 'comment-123', 
         username: 'user-123', 
-        date: new Date().toISOString(),
+        date: new Date(),
         content: 'content', 
         is_delete: false 
       },
       {
         id: 'comment-456',
         username: 'user-123',
-        date: new Date().toISOString(),
+        date: new Date(),
         content: 'Cukup OKe',
         is_delete: true
       },
@@ -37,7 +37,7 @@ describe('GetThreadUseCase', () => {
       {
         id: 'reply-123',
         content: 'content',
-        date: new Date().toISOString(),
+        date: new Date(),
         username: 'user-123',
         is_delete: false,
         comment_id: 'comment-123' 
@@ -45,7 +45,7 @@ describe('GetThreadUseCase', () => {
       {
         id: 'reply-456',
         content: 'cukup OKe',
-        date: new Date().toISOString(),
+        date: new Date(),
         username: 'user-123',
         is_delete: true,
         comment_id: 'comment-123',
@@ -56,27 +56,27 @@ describe('GetThreadUseCase', () => {
         id: 'thread-123',
         title: 'title',
         body: 'body',
-         date: new Date().toISOString(),
+         date: new Date(),
         
         username: 'user-123',
         comments: [
           {
             id: 'comment-123',
             username: 'user-123',
-             date: new Date().toISOString(),
+             date: new Date(),
             
             replies: [
               {
                 id: 'reply-123',
                 content: 'content',
-                 date: new Date().toISOString(),
+                 date: new Date(),
                 
                 username: 'user-123',
               },
               {
                 id: 'reply-456',
                 content: '**balasan telah dihapus**',
-                 date: new Date().toISOString(),
+                 date: new Date(),
                 
                 username: 'user-123'
               },
@@ -86,7 +86,7 @@ describe('GetThreadUseCase', () => {
             {
               id: 'comment-456',
               username: 'user-123',
-              date: new Date().toISOString(),
+              date: new Date(),
               replies: [],
               content: '**komentar telah dihapus**'
             },
@@ -118,7 +118,7 @@ describe('GetThreadUseCase', () => {
     const threads = await getThreadUseCase.execute(useCasePayload);
 
 
-    expect(threads).toStrictEqual(mockGetDetails);
+    expect(threads).toEqual(mockGetDetails);
 
     expect(mockThreadRepository.getThreadById).toBeCalledWith(useCasePayload);
     expect(mockCommentRepository.getCommentsByThreadId).toBeCalledWith(useCasePayload);

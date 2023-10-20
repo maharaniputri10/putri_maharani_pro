@@ -9,13 +9,7 @@ const RepliesTableTestHelper = require('../../../../tests/RepliesTableTestHelper
 
 
 describe('/threads/{threadId}/comments endpoint', () => {
-    
-    // beforeAll(async () => {
-    //   await UsersTableTestHelper.addUser();
-    //   await ThreadsTableTestHelper.addThread();
-    //   await CommentsTableTestHelper.addComment();
-    // })
-
+ 
     afterAll(async () => {
       await pool.end()
     });
@@ -38,8 +32,18 @@ describe('when POST /threads/{threadId}/comments/{commentId}/replies', () => {
 
       const accessToken = await ServerTestHelper.getAccessToken();
       const server = await createServer(container);
+      
+      const userPayload = {
+        username : 'dicoding',
+        password: 'secret',
+        fullname: 'Dicoding Indonesia'
+      }
       const threadId = 'thread-123';
       const commentId = 'comment-123';
+
+      await UsersTableTestHelper.addUser({
+        id: userPayload
+       });
 
       await ThreadsTableTestHelper.addThread(
         { id: threadId }
@@ -67,8 +71,17 @@ describe('when POST /threads/{threadId}/comments/{commentId}/replies', () => {
       const accessToken = await ServerTestHelper.getAccessToken();
       const server = await createServer(container);
 
+      const userPayload = {
+        username : 'dicoding',
+        password: 'secret',
+        fullname: 'Dicoding Indonesia'
+      }
       const threadId = 'thread-123';
       const commentId = 'comment-123';
+
+      await UsersTableTestHelper.addUser(
+       {id: userPayload}
+      );
 
       await ThreadsTableTestHelper.addThread(
         { id: threadId }
@@ -100,9 +113,18 @@ describe('when POST /threads/{threadId}/comments/{commentId}/replies', () => {
       const accessToken = await ServerTestHelper.getAccessToken();
       const server = await createServer(container);
 
+      const userPayload = {
+        username : 'dicoding',
+        password: 'secret',
+        fullname: 'Dicoding Indonesia'
+      }
       const threadId = 'thread-123';
       const commentId = 'comment-123';
 
+      await UsersTableTestHelper.addUser({
+        id: userPayload
+      });
+      
       await ThreadsTableTestHelper.addThread(
         { id: threadId }
       );
@@ -132,6 +154,11 @@ describe('when POST /threads/{threadId}/comments/{commentId}/replies', () => {
     it('should response 200 and delete reply successfully', async () => {
       const accessToken = await ServerTestHelper.getAccessToken();
       const server = await createServer(container);
+
+      const User = 'userOwner';
+      await UsersTableTestHelper.addUser(
+        { id: User, username: 'userOwner' }
+      );
 
       const threadId = 'thread-123';
       await ThreadsTableTestHelper.addThread(

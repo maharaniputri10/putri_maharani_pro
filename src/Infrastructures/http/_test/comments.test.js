@@ -29,6 +29,16 @@ describe('/thread endpoint', () => {
       const accessToken = await ServerTestHelper.getAccessToken();
       const server = await createServer(container);
 
+      const userPayload = {
+        username : 'dicoding',
+        password: 'secret',
+        fullname: 'Dicoding Indonesia'
+      }
+
+      await UsersTableTestHelper.addUser({
+        id: userPayload
+       });
+
       const threadId = 'thread-123';
       await ThreadsTableTestHelper.addThread
       ({
@@ -54,6 +64,16 @@ describe('/thread endpoint', () => {
       const requestPayload = {};
       const accessToken = await ServerTestHelper.getAccessToken();
       const server = await createServer(container);
+
+      const userPayload = {
+        username : 'dicoding',
+        password: 'secret',
+        fullname: 'Dicoding Indonesia'
+      }
+
+      await UsersTableTestHelper.addUser({
+        id: userPayload
+       });
 
       const threadId = 'thread-123';
       await ThreadsTableTestHelper.addThread
@@ -81,6 +101,16 @@ describe('/thread endpoint', () => {
 
       const server = await createServer(container);
 
+      const userPayload = {
+        username : 'dicoding',
+        password: 'secret',
+        fullname: 'Dicoding Indonesia'
+      }
+
+      await UsersTableTestHelper.addUser({
+        id: userPayload
+       });
+
       const threadId = 'thread-123';
       await ThreadsTableTestHelper.addThread
       (
@@ -106,8 +136,20 @@ describe('/thread endpoint', () => {
     it('should response 201 and comment deleted', async () => {
       const accessToken = await ServerTestHelper.getAccessToken();
       const server = await createServer(container);
+      
+      const userPayload = {
+        username : 'dicoding',
+        password: 'secret',
+        fullname: 'Dicoding Indonesia'
+      }
+
+      await UsersTableTestHelper.addUser({
+        id: userPayload
+       });
+      
       const threadId = 'thread-123';
       await ThreadsTableTestHelper.addThread({ id: threadId });
+      
       const commentId = 'comment-123';
       await CommentsTableTestHelper.addComment
       ({ id: commentId, threadId });
@@ -137,7 +179,7 @@ describe('/thread endpoint', () => {
       const threadId = 'thread-123';
       await ThreadsTableTestHelper.addThread({ id: threadId });
       const commentId = 'comment-123';
-      await CommentsTableTestHelper.addComment({ id: commentId, threadId, owner: anotherUserId });
+      await CommentsTableTestHelper.addComment({ id: commentId, threadId, owner: anotherUser });
 
       const response = await server.inject({
         method: 'DELETE',

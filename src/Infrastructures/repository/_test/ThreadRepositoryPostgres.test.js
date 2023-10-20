@@ -80,7 +80,7 @@ describe('ThreadRepositoryPostgres', () => {
         title: 'Thread Title',
         body: 'Dicoding Indo',
         owner: 'user-123',
-        date: new Date().toISOString(),
+        date: new Date(),
       };
       const userData = {
         id: 'user-123',

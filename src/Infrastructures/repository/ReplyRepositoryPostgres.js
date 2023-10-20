@@ -18,7 +18,7 @@ class ReplyRepositoryPostgres extends ReplyRepository {
     const { content, owner, commentId } = newReply;
     const id = `reply-${this._idGenerator()}`;
 
-    const date = new Date().toISOString();
+    const date = new Date();
 
     const query = {
       text: 'INSERT INTO replies(id, content, owner, comment_id, date) VALUES($1, $2, $3, $4, $5) RETURNING id, content, owner',
@@ -81,7 +81,7 @@ class ReplyRepositoryPostgres extends ReplyRepository {
 
     const result = await this._pool.query(query);
     if (!result.rowCount) {
-      throw new AuthorizationError('jangan coba2 ubah!');
+      throw new AuthorizationError('Anda tidak mempunyai hak akses');
     }
   }
 }

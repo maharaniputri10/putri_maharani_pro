@@ -66,7 +66,7 @@ describe('ReplyRepositoryPostgres', () => {
         content: 'untuk Dicoding',
         owner: 'user-123',
         commentId: 'comment-123',
-        date: new Date().toISOString(),
+        date: new Date(),
       };
       const dataOwner = {
         id: 'user-123',
@@ -104,7 +104,7 @@ describe('ReplyRepositoryPostgres', () => {
       expect(replyByThreadId[0].date).toEqual(Addreply.date);
 
       expect(replyByThreadId[0]).toHaveProperty('username');
-      expect(replyByThreadId[0].username).toEqual(Addreply.username);
+      expect(replyByThreadId[0].username).toEqual(dataOwner.username);
 
       expect(replyByThreadId[0]).toHaveProperty('comment_id');
       expect(replyByThreadId[0].comment_id).toEqual(Addreply.commentId);

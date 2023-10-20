@@ -17,7 +17,7 @@ class CommentRepositoryPostgres extends CommentRepository {
     const { content, owner, threadId } = newComment;
     const id = `comment-${this._idGenerator()}`;
 
-    const date = new Date().toISOString();
+    const date = new Date();
 
      const query = {
       text: 'INSERT INTO comments(id, content, owner, thread_id, date) VALUES($1, $2, $3, $4, $5) RETURNING id, content, owner',
@@ -84,7 +84,7 @@ class CommentRepositoryPostgres extends CommentRepository {
     const result = await this._pool.query(query);
 
     if (!result.rowCount) {
-      throw new AuthorizationError('Anda tidak dapat mengakses komentar ini!');
+      throw new AuthorizationError('tidak dapat mengakses resource ini');
     }
   }
 }
