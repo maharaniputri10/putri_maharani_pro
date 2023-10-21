@@ -41,9 +41,7 @@ describe('when POST /threads/{threadId}/comments/{commentId}/replies', () => {
       const threadId = 'thread-123';
       const commentId = 'comment-123';
 
-      await UsersTableTestHelper.addUser({
-        id: userPayload
-       });
+      await UsersTableTestHelper.addUser(userPayload);
 
       await ThreadsTableTestHelper.addThread(
         { id: threadId }
@@ -79,9 +77,7 @@ describe('when POST /threads/{threadId}/comments/{commentId}/replies', () => {
       const threadId = 'thread-123';
       const commentId = 'comment-123';
 
-      await UsersTableTestHelper.addUser(
-       {id: userPayload}
-      );
+      await UsersTableTestHelper.addUser(userPayload);
 
       await ThreadsTableTestHelper.addThread(
         { id: threadId }
@@ -121,9 +117,7 @@ describe('when POST /threads/{threadId}/comments/{commentId}/replies', () => {
       const threadId = 'thread-123';
       const commentId = 'comment-123';
 
-      await UsersTableTestHelper.addUser({
-        id: userPayload
-      });
+      await UsersTableTestHelper.addUser(userPayload);
       
       await ThreadsTableTestHelper.addThread(
         { id: threadId }

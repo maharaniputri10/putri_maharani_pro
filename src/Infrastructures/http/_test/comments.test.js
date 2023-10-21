@@ -35,9 +35,7 @@ describe('/thread endpoint', () => {
         fullname: 'Dicoding Indonesia'
       }
 
-      await UsersTableTestHelper.addUser({
-        id: userPayload
-       });
+      await UsersTableTestHelper.addUser(userPayload);
 
       const threadId = 'thread-123';
       await ThreadsTableTestHelper.addThread
@@ -71,9 +69,7 @@ describe('/thread endpoint', () => {
         fullname: 'Dicoding Indonesia'
       }
 
-      await UsersTableTestHelper.addUser({
-        id: userPayload
-       });
+      await UsersTableTestHelper.addUser(userPayload);
 
       const threadId = 'thread-123';
       await ThreadsTableTestHelper.addThread
@@ -107,9 +103,7 @@ describe('/thread endpoint', () => {
         fullname: 'Dicoding Indonesia'
       }
 
-      await UsersTableTestHelper.addUser({
-        id: userPayload
-       });
+      await UsersTableTestHelper.addUser(userPayload);
 
       const threadId = 'thread-123';
       await ThreadsTableTestHelper.addThread
@@ -143,9 +137,7 @@ describe('/thread endpoint', () => {
         fullname: 'Dicoding Indonesia'
       }
 
-      await UsersTableTestHelper.addUser({
-        id: userPayload
-       });
+      await UsersTableTestHelper.addUser(userPayload);
       
       const threadId = 'thread-123';
       await ThreadsTableTestHelper.addThread({ id: threadId });
