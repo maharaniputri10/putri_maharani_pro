@@ -120,6 +120,9 @@ describe('CommentRepositoryPostgres', () => {
 
       const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
       
+      const kommen = CommentsTableTestHelper.findCommentsById(commentId);
+      console.log(kommen);
+
       expect(commentRepositoryPostgres.verifyCommentOwner(commentId, userId)).resolves.not.toThrowError(AuthorizationError);
     
     });
@@ -162,6 +165,9 @@ describe('CommentRepositoryPostgres', () => {
   describe('getCommentByThreadId function', () => {
     it('get comments by threadId', async () => {
       const threadId = 'thread-123';
+      const date = new Date();
+
+
       await UsersTableTestHelper.addUser({
          id: 'user-123' 
       }); 
@@ -174,7 +180,7 @@ describe('CommentRepositoryPostgres', () => {
         {
         id: 'comment-123',
         threadId,
-        date: new Date()
+        date: date,
         }
       );
 
@@ -182,7 +188,7 @@ describe('CommentRepositoryPostgres', () => {
         {
         id: 'comment-321',
         threadId,
-        date: new Date()
+        date: date,
         }
       );
 
@@ -202,14 +208,14 @@ describe('CommentRepositoryPostgres', () => {
         'comment-123'
       );
       expect(comments[0].date).toEqual(
-         new Date()
+         date
       );
       expect(comments[0].username).toEqual('dicoding');
       expect(comments[0].content).toEqual('dicoding'); 
       expect(comments[0].is_delete).toEqual(false);
 
       expect(comments[1].id).toEqual('comment-321');
-      expect(comments[1].date).toEqual(new Date());
+      expect(comments[1].date).toEqual(date);
      
       expect(comments[1].username).toEqual('dicoding');
       expect(comments[1].content).toEqual('dicoding'); 
