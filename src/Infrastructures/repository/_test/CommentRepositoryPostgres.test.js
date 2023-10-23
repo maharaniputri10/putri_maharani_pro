@@ -119,7 +119,7 @@ describe('CommentRepositoryPostgres', () => {
       );
 
       const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
-      
+
       const kommen = CommentsTableTestHelper.findCommentsById(commentId);
       console.log(kommen);
 
@@ -166,7 +166,7 @@ describe('CommentRepositoryPostgres', () => {
     it('get comments by threadId', async () => {
       const threadId = 'thread-123';
       const date = new Date();
-
+      const date2 = new date();
 
       await UsersTableTestHelper.addUser({
          id: 'user-123' 
@@ -188,7 +188,7 @@ describe('CommentRepositoryPostgres', () => {
         {
         id: 'comment-321',
         threadId,
-        date: date,
+        date: date2,
         }
       );
 
