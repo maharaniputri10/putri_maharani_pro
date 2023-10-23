@@ -193,8 +193,11 @@ describe('ReplyRepositoryPostgres', () => {
         commentId
       });
 
-      const replyRepositoryPostgres = new ReplyRepositoryPostgres(pool, {});
+      const replies = RepliesTableTestHelper.findReplyById(replyId);
+      console.log(replies);
 
+      const replyRepositoryPostgres = new ReplyRepositoryPostgres(pool, {});
+     
       expect(replyRepositoryPostgres.verifyReplyOwner(replyId, userId)).resolves.not.toThrowError(AuthorizationError);
     });
   });

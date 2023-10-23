@@ -121,6 +121,7 @@ describe('CommentRepositoryPostgres', () => {
       const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
       
       expect(commentRepositoryPostgres.verifyCommentOwner(commentId, userId)).resolves.not.toThrowError(AuthorizationError);
+    
     });
   });
 
@@ -184,6 +185,9 @@ describe('CommentRepositoryPostgres', () => {
         date: new Date()
         }
       );
+
+      // const commen = CommentsTableTestHelper.findCommentsById(threadId);
+      // console.log(commen);
 
       const fakeIdGenerator = () => '123';
      
