@@ -186,8 +186,8 @@ describe('CommentRepositoryPostgres', () => {
         }
       );
 
-      // const commen = CommentsTableTestHelper.findCommentsById(threadId);
-      // console.log(commen);
+       const commen = CommentsTableTestHelper.findCommentsById(threadId);
+       console.log(commen);
 
       const fakeIdGenerator = () => '123';
      
@@ -199,7 +199,7 @@ describe('CommentRepositoryPostgres', () => {
       expect(comments).toBeDefined();
       expect(comments).toHaveLength(2);
       expect(comments[0].id).toEqual(
-        'comment-321'
+        'comment-123'
       );
       expect(comments[0].date).toEqual(
          new Date()
@@ -208,7 +208,7 @@ describe('CommentRepositoryPostgres', () => {
       expect(comments[0].content).toEqual('dicoding'); 
       expect(comments[0].is_delete).toEqual(false);
 
-      expect(comments[1].id).toEqual('comment-123');
+      expect(comments[1].id).toEqual('comment-321');
       expect(comments[1].date).toEqual(new Date());
      
       expect(comments[1].username).toEqual('dicoding');
