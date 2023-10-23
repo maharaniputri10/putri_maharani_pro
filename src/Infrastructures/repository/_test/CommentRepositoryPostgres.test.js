@@ -166,7 +166,7 @@ describe('CommentRepositoryPostgres', () => {
     it('get comments by threadId', async () => {
       const threadId = 'thread-123';
       const date = new Date();
-      const date2 = new date();
+      const date2 = new Date();
 
       await UsersTableTestHelper.addUser({
          id: 'user-123' 
