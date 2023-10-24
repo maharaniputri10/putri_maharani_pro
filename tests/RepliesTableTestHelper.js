@@ -6,8 +6,8 @@ const RepliesTableTestHelper = {
     content = 'dicoding',
     owner = 'user-123',
     commentId = 'comment-123',
+    date = new Date(),
     isDelete = 'false',
-    date = new Date()
     
   }) {
     const query = {

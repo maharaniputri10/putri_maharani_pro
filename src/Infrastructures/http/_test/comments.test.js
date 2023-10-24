@@ -161,17 +161,27 @@ describe('/thread endpoint', () => {
     it('should response 403 when wrong user', async () => {
       const accessToken = await ServerTestHelper.getAccessToken();
       const server = await createServer(container);
-      const anotherUser = 'userNotOwner';
-      await UsersTableTestHelper.addUser
-      ({ 
-        id: anotherUser, 
-        username: 'userNotOwner'
-      });
+
+      const userPayload = {
+        username : 'dicod',
+        password: 'secret',
+        fullname: 'Dicoding Indonesia'
+      }
+
+      await UsersTableTestHelper.addUser(userPayload);
+
+      // const anotherUser = 'userNotOwner';
+      // await UsersTableTestHelper.addUser
+      // ({ 
+      //   id: anotherUser, 
+      //   username: 'userNotOwner'
+      // });
 
       const threadId = 'thread-123';
       await ThreadsTableTestHelper.addThread({ id: threadId });
+
       const commentId = 'comment-123';
-      await CommentsTableTestHelper.addComment({ id: commentId, threadId, owner: anotherUser });
+      await CommentsTableTestHelper.addComment({ id: commentId, threadId, owner: userPayload });
 
       const response = await server.inject({
         method: 'DELETE',

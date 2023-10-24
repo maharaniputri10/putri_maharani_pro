@@ -38,6 +38,8 @@ class CommentsHandler {
 
   async deleteCommentByIdHandler(request, h) {
     const { id: userId } = request.auth.credentials;
+   console.log('test');
+    console.log(userId);
 
     const { threadId, commentId } = request.params;
 
