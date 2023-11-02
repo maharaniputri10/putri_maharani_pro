@@ -8,14 +8,36 @@ const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
 
 
 describe('/threads endpoint', () => {
-    afterAll(async () => {
-       await pool.end()
+    // afterAll(async () => {
+    //    await pool.end()
+    // });
+
+    // afterEach(async () => {
+    //   await UsersTableTestHelper.cleanTable();
+    //   await ThreadsTableTestHelper.cleanTable();
+    // });
+
+    beforeAll(async () => {
+      const userPayload = {
+        username: "testing",
+        password: "secret",
+        fullname: "Dicod",
+      };
+  
+      await UsersTableTestHelper.addUser(userPayload);
     });
 
-    afterEach(async () => {
+      afterEach(async () => {
+        await ThreadsTableTestHelper.cleanTable();
+      });
+  
+
+    afterAll(async () => {
       await UsersTableTestHelper.cleanTable();
-      await ThreadsTableTestHelper.cleanTable();
+      await pool.end();
     });
+  
+   
 
 
 describe('when POST /threads', () => {
