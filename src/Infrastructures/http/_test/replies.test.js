@@ -30,7 +30,8 @@ describe('when POST /threads/{threadId}/comments/{commentId}/replies', () => {
         content: 'Dicoding Indonesia ' 
       };
 
-      const accessToken = await ServerTestHelper.getAccessToken();
+      //const accessToken = await ServerTestHelper.getAccessToken();
+
       const server = await createServer(container);
       
       const userPayload = {
@@ -66,7 +67,8 @@ describe('when POST /threads/{threadId}/comments/{commentId}/replies', () => {
 
     it('should response 400 when request payload not meet data type specification', async () => {
       const requestPayload = { content: 123 };
-      const accessToken = await ServerTestHelper.getAccessToken();
+      //const accessToken = await ServerTestHelper.getAccessToken();
+      const accessToken = await ServerTestHelper.getAccessToken({});
       const server = await createServer(container);
 
       const userPayload = {
@@ -106,7 +108,8 @@ describe('when POST /threads/{threadId}/comments/{commentId}/replies', () => {
 
     it('should response 400 when request payload not contain needed property', async () => {
       const requestPayload = {};
-      const accessToken = await ServerTestHelper.getAccessToken();
+      //const accessToken = await ServerTestHelper.getAccessToken();
+      const accessToken = await ServerTestHelper.getAccessToken({});
       const server = await createServer(container);
 
       const userPayload = {
@@ -146,7 +149,8 @@ describe('when POST /threads/{threadId}/comments/{commentId}/replies', () => {
   describe('when DELETE /threads/{threadId}/comments/{commentId}/replies/{replyId}', () => {
    
     it('should response 200 and delete reply successfully', async () => {
-      const accessToken = await ServerTestHelper.getAccessToken();
+      //const accessToken = await ServerTestHelper.getAccessToken();
+      const accessToken = await ServerTestHelper.getAccessToken({});
       const server = await createServer(container);
 
       const userPayload = {
@@ -189,7 +193,8 @@ describe('when POST /threads/{threadId}/comments/{commentId}/replies', () => {
 
 
     it('should response 403 when wrong user', async () => {
-      const accessToken = await ServerTestHelper.getAccessToken();
+      //const accessToken = await ServerTestHelper.getAccessToken();
+      const accessToken = await ServerTestHelper.getAccessToken({});
       const server = await createServer(container);
 
       const userPayload = {
@@ -238,7 +243,8 @@ describe('when POST /threads/{threadId}/comments/{commentId}/replies', () => {
 
     
     it('should response 404 when thread or comment not found', async () => {
-      const accessToken = await ServerTestHelper.getAccessToken();
+      //const accessToken = await ServerTestHelper.getAccessToken();
+      const accessToken = await ServerTestHelper.getAccessToken({});
       const server = await createServer(container);
 
       const threadId = 'thread-123';

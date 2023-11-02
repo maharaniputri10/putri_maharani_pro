@@ -258,7 +258,8 @@ describe("/thread endpoint", () => {
       const requestPayload = {
         content: "Dicoding Indonesia",
       };
-      const accessToken = await ServerTestHelper.getAccessToken();
+      //const accessToken = await ServerTestHelper.getAccessToken();
+      const accessToken = await ServerTestHelper.getAccessToken({});
       const server = await createServer(container);
 
       const response = await server.inject({
@@ -277,7 +278,8 @@ describe("/thread endpoint", () => {
 
     it("should response 400 when request payload not contain needed property", async () => {
       const requestPayload = {};
-      const accessToken = await ServerTestHelper.getAccessToken();
+      //const accessToken = await ServerTestHelper.getAccessToken();
+      const accessToken = await ServerTestHelper.getAccessToken({});
       const server = await createServer(container);
 
       const response = await server.inject({
@@ -297,8 +299,8 @@ describe("/thread endpoint", () => {
 
     it("should response 400 when request payload not meet data type specification", async () => {
       const requestPayload = { content: 123 };
-      const accessToken = await ServerTestHelper.getAccessToken();
-
+     // const accessToken = await ServerTestHelper.getAccessToken();
+     const accessToken = await ServerTestHelper.getAccessToken({});
       const server = await createServer(container);
 
       const response = await server.inject({
@@ -316,7 +318,8 @@ describe("/thread endpoint", () => {
 
   describe("when DELETE /threads/{threadId}/comments/{commentId}", () => {
     it("should response 201 and comment deleted", async () => {
-      const accessToken = await ServerTestHelper.getAccessToken();
+      //const accessToken = await ServerTestHelper.getAccessToken();
+      const accessToken = await ServerTestHelper.getAccessToken({});
       const server = await createServer(container);
 
       const commentId = "comment-123";
@@ -408,7 +411,8 @@ describe("/thread endpoint", () => {
 
 
     it("should response 404 when thread or comment not found", async () => {
-      const accessToken = await ServerTestHelper.getAccessToken();
+      //const accessToken = await ServerTestHelper.getAccessToken();
+      const accessToken = await ServerTestHelper.getAccessToken({});
       const server = await createServer(container);
       const threadId = "thread-123";
       const commentId = "comment-123";

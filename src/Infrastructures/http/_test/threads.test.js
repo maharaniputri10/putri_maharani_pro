@@ -32,7 +32,8 @@ describe("/threads endpoint", () => {
         body: "Dicoding Indonesia",
       };
 
-      const accessToken = await ServerTestHelper.getAccessToken();
+      //const accessToken = await ServerTestHelper.getAccessToken();
+      const accessToken = await ServerTestHelper.getAccessToken({});
       const server = await createServer(container);
 
       const response = await server.inject({
@@ -54,7 +55,8 @@ describe("/threads endpoint", () => {
       const requestPayload = {
         title: "Dicoding Indonesia",
       };
-      const accessToken = await ServerTestHelper.getAccessToken();
+      //const accessToken = await ServerTestHelper.getAccessToken();
+      const accessToken = await ServerTestHelper.getAccessToken({});
       const server = await createServer(container);
 
       const response = await server.inject({
@@ -80,7 +82,8 @@ describe("/threads endpoint", () => {
         body: ["abbjuyo"],
       };
 
-      const accessToken = await ServerTestHelper.getAccessToken();
+      //const accessToken = await ServerTestHelper.getAccessToken();
+      const accessToken = await ServerTestHelper.getAccessToken({});
       const server = await createServer(container);
 
       const response = await server.inject({
