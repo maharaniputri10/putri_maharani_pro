@@ -205,7 +205,7 @@ describe('CommentRepositoryPostgres', () => {
       expect(comments).toBeDefined();
       expect(comments).toHaveLength(2);
       expect(comments[0].id).toEqual(
-        'comment-123'
+        'comment-321'
       );
       expect(comments[0].date).toEqual(
          date
