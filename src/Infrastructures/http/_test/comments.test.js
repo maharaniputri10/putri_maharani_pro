@@ -388,7 +388,7 @@ describe("/thread endpoint", () => {
       await CommentsTableTestHelper.addComment({
         id: commentId,
         threadId,
-        owner: userPayload,
+        owner: 'user-123',
       });
     
       const response = await server.inject({
