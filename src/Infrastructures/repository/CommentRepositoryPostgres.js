@@ -79,7 +79,7 @@ class CommentRepositoryPostgres extends CommentRepository {
       text: 'SELECT id FROM comments WHERE id = $1 AND owner= $2',
       values: [commentId, owner],
     };
-    // console.log(query.values);
+   //  console.log(query.values);
 
     const result = await this._pool.query(query);
 
