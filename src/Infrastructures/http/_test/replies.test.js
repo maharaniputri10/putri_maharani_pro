@@ -122,12 +122,13 @@ describe("/threads/{threadId}/comments endpoint", () => {
       const accessToken = await ServerTestHelper.getAccessToken({});
       const server = await createServer(container);
 
+      const userPayload = {
+        username: "dicoding",
+        password: "secret",
+        fullname: "Dicoding Indonesia",
+      };
+  
       await UsersTableTestHelper.addUser(userPayload);
-
-      // const User = 'userOwner';
-      // await UsersTableTestHelper.addUser(
-      //   { id: User, username: 'userOwner' }
-      // );
 
       const threadId = "thread-123";
       await ThreadsTableTestHelper.addThread({ id: threadId });
@@ -155,6 +156,14 @@ describe("/threads/{threadId}/comments endpoint", () => {
     it("should response 403 when wrong user", async () => {
       const accessToken = await ServerTestHelper.getAccessToken({id:"user-321"});
       const server = await createServer(container);
+
+      const userPayload = {
+        username: "dicoding",
+        password: "secret",
+        fullname: "Dicoding Indonesia",
+      };
+  
+      await UsersTableTestHelper.addUser(userPayload);
       
       const threadId = "thread-123";
       await ThreadsTableTestHelper.addThread({ id: threadId });
@@ -182,13 +191,6 @@ describe("/threads/{threadId}/comments endpoint", () => {
       expect(responseJson.status).toEqual("fail");
       expect(responseJson.message).toEqual("Anda tidak mempunyai hak akses");
     });
-
-
-
-
-
-
-
 
 
     it("should response 404 when thread or comment not found", async () => {
