@@ -23,7 +23,7 @@ describe('/threads/{threadId}/comments endpoint', () => {
   describe('when PUT /threads/{threadId}/comments/{commentId}/likes', () => {
     it('should response 200 and liked comment', async () => {
       // Arrange
-      const accessToken = await ServerTestHelper.getAccessToken();
+      const accessToken = await ServerTestHelper.getAccessToken({});
       const server = await createServer(container);
 
       const threadId = 'thread-123';
@@ -50,7 +50,7 @@ describe('/threads/{threadId}/comments endpoint', () => {
 
     it('should response 404 when thread or comment not found', async () => {
       // Arrange
-      const accessToken = await ServerTestHelper.getAccessToken();
+      const accessToken = await ServerTestHelper.getAccessToken({});
       const server = await createServer(container);
 
       const threadId = 'thread-111';
