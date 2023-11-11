@@ -35,7 +35,14 @@ DomainErrorTranslator._directories = {
   ),
   'CREATE_REPLY.NOT_MEET_DATA_TYPE_SPECIFICATION': new InvariantError(
     'tipe data tidak sesuai'
+  ),
+  'CREATE_LIKE.NOT_CONTAIN_NEEDED_PROPERTY': new InvariantError(
+    'property yang dibutuhkan tidak ada'
+  ),
+  'CREATE_LIKE.NOT_MEET_DATA_TYPE_SPECIFICATION': new InvariantError(
+    'tipe data tidak sesuai'
   )
 };
+
 
 module.exports = DomainErrorTranslator;

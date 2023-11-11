@@ -3,6 +3,7 @@ class GetThreadUseCase {
     this._threadRepository = threadRepository;
     this._commentRepository = commentRepository;
     this._replyRepository = replyRepository;
+    this._likeRepository = likeRepository;
   }
 
 
@@ -16,8 +17,8 @@ class GetThreadUseCase {
     const validatedReplies = this._validateDeletedReply(replies);
     
     const commentsReplies = this._addReplyToComment(validatedComments, validatedReplies);
-    
-    return {...thread, comments: commentsReplies };
+    const likeCountComRep = await this._addLikeCountToComment(commentsReplies);
+    return {...thread, comments: likeCountComRep };
     
   }
 
@@ -53,6 +54,14 @@ class GetThreadUseCase {
         }
         delete reply.comment_id;
       }
+    }
+    return comments;
+  }
+
+
+  async _addLikeCountToComment(comments){
+    for (const comment of comments) {
+      comment.likeCount = await this._likeRepository.getLikeCount(comment.id);
     }
     return comments;
   }

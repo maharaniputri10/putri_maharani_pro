@@ -2,7 +2,7 @@ const CommentRepository = require('../../../Domains/comments/CommentRepository')
 const ReplyRepository = require('../../../Domains/replies/ReplyRepository');
 const ThreadRepository = require('../../../Domains/threads/ThreadRepository');
 const GetThreadUseCase = require('../GetThreadUseCase');
-
+const LikeRepository = require('../../../Domains/likes/LikeRepository');
 
 describe('GetThreadUseCase', () => {
   it('should orchestrating the get thread action correctly with comment', async () => {
@@ -64,7 +64,7 @@ describe('GetThreadUseCase', () => {
           {
             id: 'comment-123',
             username: 'user-123',
-             date: date,
+            date: date,
             
             replies: [
               {
@@ -83,13 +83,15 @@ describe('GetThreadUseCase', () => {
               },
             ],
             content: 'content',
+            likeCount: 1
           },
             {
               id: 'comment-456',
               username: 'user-123',
               date: date,
               replies: [],
-              content: '**komentar telah dihapus**'
+              content: '**komentar telah dihapus**',
+              likeCount: 1
             },
         ],
     }
@@ -98,6 +100,7 @@ describe('GetThreadUseCase', () => {
     const mockCommentRepository = new CommentRepository();
     const mockThreadRepository = new ThreadRepository();
     const mockReplyRepository = new ReplyRepository();
+    const mockLikeRepository = new LikeRepository();
 
     mockThreadRepository.getThreadById = jest
       .fn()
@@ -108,11 +111,15 @@ describe('GetThreadUseCase', () => {
     mockReplyRepository.getReplyByThreadId = jest
       .fn()
       .mockImplementation(() => Promise.resolve(mockReply));
+    mockLikeRepository.getLikeCount = jest
+      .fn()
+      .mockImplementation(() => Promise.resolve(1));
 
     const getThreadUseCase = new GetThreadUseCase({
       commentRepository: mockCommentRepository,
       threadRepository: mockThreadRepository,
       replyRepository: mockReplyRepository,
+      likeRepository: mockLikeRepository,
     });
 
 
@@ -124,5 +131,7 @@ describe('GetThreadUseCase', () => {
     expect(mockThreadRepository.getThreadById).toBeCalledWith(useCasePayload);
     expect(mockCommentRepository.getCommentsByThreadId).toBeCalledWith(useCasePayload);
     expect(mockReplyRepository.getReplyByThreadId).toBeCalledWith(useCasePayload);
+    expect(mockLikeRepository.getLikeCount).toBeCalledWith('comment-123');
+    expect(mockLikeRepository.getLikeCount).toBeCalledWith('comment-456');
   });
 });
