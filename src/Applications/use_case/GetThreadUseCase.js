@@ -4,6 +4,8 @@ class GetThreadUseCase {
     this._commentRepository = commentRepository;
     this._replyRepository = replyRepository;
     this._likeRepository = likeRepository;
+    console.log('put==================================================')
+    console.log('like repository:', this._likeRepository);
   }
 
 
@@ -60,9 +62,13 @@ class GetThreadUseCase {
 
 
   async _addLikeCountToComment(comments){
+    console.log('put ======================================================')
+    console.log('Entering _addLikeCountToComment');
     for (const comment of comments) {
       comment.likeCount = await this._likeRepository.getLikeCount(comment.id);
     }
+    console.log('put ======================================================')
+    console.log('Exiting _addLikeCountToComment');
     return comments;
   }
 }
