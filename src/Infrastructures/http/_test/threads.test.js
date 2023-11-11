@@ -104,8 +104,6 @@ describe("/threads endpoint", () => {
     it("should response 200 and get thread by id", async () => {
       const threadId = "thread-123";
 
-      //await UsersTableTestHelper.addUser({ id: "user-321" });
-
       await ThreadsTableTestHelper.addThread({
         id: threadId,
         owner: "user-123",

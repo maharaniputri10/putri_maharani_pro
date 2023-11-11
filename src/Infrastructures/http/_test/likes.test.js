@@ -9,6 +9,16 @@ const createServer = require('../createServer');
 
 
 describe('/threads/{threadId}/comments endpoint', () => {
+  beforeAll(async () => {
+    const userPayload = {
+      username: "dicoding",
+      password: "secret",
+      fullname: "Dicoding Indonesia",
+    };
+
+    await UsersTableTestHelper.addUser(userPayload);
+  });
+ 
   afterAll(async () => {
     await pool.end();
   });
